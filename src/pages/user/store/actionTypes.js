@@ -1,0 +1,1 @@
+export const SUBMIT_USER_INFO = "/USER/SUBMIT_USER_INFO";
