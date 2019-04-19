@@ -21,7 +21,7 @@ type:   请求类型 0为'application/x-www-form-urlencoded', 1为'application/j
 params: 请求参数{key:value}
 token:  是否需要添加token,true为添加，false为不添加
 */
-function ajaxRequest(method, url, type, params, token){
+function $http (method, url, type, params, token){
   let contentType = ['application/x-www-form-urlencoded', 'application/json', 'multipart/form-data'],
     headers = { 'content-type': contentType[type] };
   if(token === true){
@@ -39,4 +39,4 @@ function ajaxRequest(method, url, type, params, token){
 }
 
 
-export default ajaxRequest;
+export default $http;

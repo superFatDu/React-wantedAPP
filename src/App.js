@@ -6,7 +6,7 @@ import { GlobalStyle } from "./style";
 import { FontStyle } from "./statics/iconfont/iconfont";
 import Login from "./pages/user/login";
 import Register from "./pages/user/regist";
-import axios from "axios";
+import AuthRoute from "./components/authRoute/authRoute";
 import "./App.css";
 
 class App extends Component {
@@ -16,16 +16,12 @@ class App extends Component {
         <GlobalStyle/>
         <FontStyle/>
         <BrowserRouter>
+          <AuthRoute/>
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
         </BrowserRouter>
       </Provider>
     );
-  }
-  componentDidMount() {
-    axios.get("/users/getUser").then(res => {
-      console.log(res.data);
-    })
   }
 }
 
