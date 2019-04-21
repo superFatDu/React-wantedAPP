@@ -1,12 +1,10 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import { getAuth } from "../../api/user/AuthRoute";
 import { withRouter } from "react-router-dom";
 
 class AuthRoute extends PureComponent {
   render() {
-    return (
-      <div>AuthRoute</div>
-    )
+    return null
   }
   componentDidMount() {
     // 定义一个白名单
