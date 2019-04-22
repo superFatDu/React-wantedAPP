@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import { postRegInfo } from "../../../api/user"
+import { postRegInfo, userLogin } from "../../../api/user"
 
 export const handleUserRole = (role) => ({
   type: actionTypes.HANDLE_USER_ROLE,
@@ -25,8 +25,8 @@ export const handleUserSubmit = (account, password, type) => {
     if (!account || !password ||!type) {
       dispatch ({
         type: actionTypes.HANDLE_USER_SUBMIT,
-        loginMsg: [],
-        responseMsg: "账号密码不能为空"
+        regMsg: [],
+        resRegMsg: "账号密码不能为空"
       })
     } else {
       let params = {
@@ -35,18 +35,46 @@ export const handleUserSubmit = (account, password, type) => {
         type: type
       };
       postRegInfo(params).then(res => {
-        let loginMsg = [];
+        let regMsg = [];
         if (res.status === 200) {
           if (res.data.code === 0) {
-            loginMsg = res.data.loginMsg
+            regMsg = res.data.regMsg
           }
           dispatch ({
             type: actionTypes.HANDLE_USER_SUBMIT,
-            loginMsg,
-            responseMsg: res.data.msg
+            regMsg,
+            resRegMsg: res.data.msg
           })
         }
       })
     }
   }
 };
+
+export const handleUserLogin = (user, pwd) => {
+  return (dispatch) => {
+    if (!user || !pwd) {
+      dispatch({
+        type: actionTypes.HANDLE_USER_LOGIN,
+        loginMsg: [],
+        resLoginMsg: "账号密码都不能为空"
+      })
+    } else {
+      let params = { user, pwd };
+      userLogin(params).then(res => {
+        if (res.status === 200) {
+          let loginMsg = [];
+          res = res.data;
+          if (res.code === 0) {
+            loginMsg = res.loginMsg
+          }
+          dispatch({
+            type: actionTypes.HANDLE_USER_LOGIN,
+            loginMsg,
+            resLoginMsg: res.msg
+          })
+        }
+      })
+    }
+  }
+}

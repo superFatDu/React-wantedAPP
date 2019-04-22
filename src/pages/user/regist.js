@@ -37,7 +37,7 @@ class Register extends PureComponent {
             <span className={this.props.type === "genius" ? "unchecked" : "checked"}>伯乐</span>
           </InputWrapper>
           <UserSubmitBtn onTouchEnd={() => this.props.handleSubmit(this.props.account, this.props.password, this.props.type)}>提交注册</UserSubmitBtn>
-          <ResponseMsg className={Object.keys(this.props.loginMsg).length === 0 ? "error" : ""}>{this.props.responseMsg}</ResponseMsg>
+          <ResponseMsg className={this.props.regMsg.length === 0 ? "error" : ""}>{this.props.resRegMsg}</ResponseMsg>
         </UserForm>
         <ToRegister>
           已有账号，<Link to="/login">跳转登录！</Link>
@@ -52,8 +52,8 @@ const mapStateToProps = (state) => {
     account: state.getIn(["user", "account"]),
     password: state.getIn(["user", "password"]),
     type: state.getIn(["user", "type"]),
-    loginMsg: state.getIn(["user", "loginMsg"]),
-    responseMsg: state.getIn(["user", "responseMsg"])
+    regMsg: state.getIn(["user", "regMsg"]),
+    resRegMsg: state.getIn(["user", "resRegMsg"])
   }
 };
 

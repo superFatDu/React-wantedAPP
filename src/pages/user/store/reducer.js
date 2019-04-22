@@ -5,8 +5,11 @@ const defaultState = fromJS({
   account: "",
   password: "",
   type: "genius",
-  responseMsg: "",
-  loginMsg: []
+  resRegMsg: "",
+  regMsg: [],
+  loginMsg: [],
+  resLoginMsg: "",
+  redirectTo: ""
 });
 
 export default (state = defaultState, action) => {
@@ -18,7 +21,12 @@ export default (state = defaultState, action) => {
     case actionTypes.HANDLE_USER_PASSWORD:
       return state.set("password", action.value);
     case actionTypes.HANDLE_USER_SUBMIT:
-        return state.set("responseMsg", action.responseMsg).set("loginMsg", action.loginMsg)
+      return state.set("resRegMsg", action.resRegMsg).set("regMsg", action.regMsg);
+    case actionTypes.HANDLE_USER_LOGIN:
+      if (action.loginMsg.length === 0) {
+        return state.set("resLoginMsg", action.resLoginMsg).set("loginMsg", action.loginMsg);
+      }
+      return state.set("resLoginMsg", action.resLoginMsg).set("loginMsg", action.loginMsg).set("redirectTo", "/" + action.loginMsg.type + "info");
     default:
       break;
   }

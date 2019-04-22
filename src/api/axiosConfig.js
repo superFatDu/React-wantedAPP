@@ -3,7 +3,7 @@ import { Toast } from "antd-mobile/lib/index";
 import qs from "qs";
 
 axios.interceptors.request.use(config => {
-  Toast.loading("加载中", 0);
+  Toast.loading("加载中", 500);
   return config;
 }, error => {
   return Promise.reject(error);
