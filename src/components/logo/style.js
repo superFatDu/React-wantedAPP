@@ -4,7 +4,7 @@ import logoImg from "../../statics/img/user.svg";
 export const LogoWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-top: 0.5rem;
+  padding-top: 0.3rem;
   display: flex;
   justify-content: center;
 `;
