@@ -1,0 +1,1 @@
+export const HANDLE_BOSS_INFO = "/BOSS/HANDLE_BOSS_INFO";
