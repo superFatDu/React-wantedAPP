@@ -9,7 +9,8 @@ const defaultState = fromJS({
   regMsg: [],
   loginMsg: [],
   resLoginMsg: "",
-  redirectTo: ""
+  redirectTo: "",
+  isReg: false
 });
 
 export default (state = defaultState, action) => {
@@ -21,7 +22,10 @@ export default (state = defaultState, action) => {
     case actionTypes.HANDLE_USER_PASSWORD:
       return state.set("password", action.value);
     case actionTypes.HANDLE_USER_SUBMIT:
-      return state.set("resRegMsg", action.resRegMsg).set("regMsg", action.regMsg);
+      if (action.regMsg.length === 0) {
+        return state.set("resRegMsg", action.resRegMsg).set("regMsg", action.regMsg);
+      }
+      return state.set("resRegMsg", action.resRegMsg).set("regMsg", action.regMsg).set("isReg", true);
     case actionTypes.HANDLE_USER_LOGIN:
       if (action.loginMsg.length === 0) {
         return state.set("resLoginMsg", action.resLoginMsg).set("loginMsg", action.loginMsg);

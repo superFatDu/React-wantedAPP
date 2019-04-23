@@ -1,6 +1,8 @@
 import { PureComponent } from "react";
 import { getAuth } from "../../api/user/AuthRoute";
 import { withRouter } from "react-router-dom";
+import { handleAuth } from "./store/reducer";
+import store from "../../store";
 
 class AuthRoute extends PureComponent {
   render() {
@@ -19,6 +21,7 @@ class AuthRoute extends PureComponent {
         res = res.data;
         if (res.code === 0) {
           // 有登录信息
+          store.dispatch(handleAuth(res.msg));
         } else {
           this.props.history.push("/login");
         }

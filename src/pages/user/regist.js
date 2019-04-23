@@ -1,5 +1,5 @@
 import React, { PureComponent} from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { actionCreators } from "./store"
 import {
@@ -18,6 +18,11 @@ class Register extends PureComponent {
   render() {
     return (
       <UserWrapper>
+        {
+          this.props.isReg
+            ? <Redirect to="/login"/>
+            : ""
+        }
         <Logo/>
         <UserForm>
           <InputWrapper>
@@ -53,7 +58,8 @@ const mapStateToProps = (state) => {
     password: state.getIn(["user", "password"]),
     type: state.getIn(["user", "type"]),
     regMsg: state.getIn(["user", "regMsg"]),
-    resRegMsg: state.getIn(["user", "resRegMsg"])
+    resRegMsg: state.getIn(["user", "resRegMsg"]),
+    isReg: state.getIn(["user", "isReg"])
   }
 };
 
