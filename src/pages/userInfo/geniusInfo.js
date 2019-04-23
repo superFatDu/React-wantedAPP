@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { InputItem, TextareaItem, Grid } from "antd-mobile";
 import { connect } from "react-redux";
-import { handleInfoSubmit } from "./store/actionCreators";
+import { handleInfoSubmit, handleIsUpdated } from "./store/actionCreators";
 import { Redirect } from "react-router-dom";
 import {
   InfoWrapper,
@@ -10,6 +10,7 @@ import {
   InfoList,
   InfoSubmit
 } from "./style";
+import AuthRoute from "../../components/authRoute/authRoute";
 
 class GeniusInfo extends PureComponent {
   constructor(props) {
@@ -29,6 +30,7 @@ class GeniusInfo extends PureComponent {
       }));
     return (
       <InfoWrapper>
+        <AuthRoute/>
         {
           this.props.redirectTo
             ? <Redirect push to={this.props.redirectTo}/>
@@ -60,16 +62,22 @@ class GeniusInfo extends PureComponent {
       [key]: v
     })
   }
+  componentDidMount() {
+    this.props.handleUpdated();
+  }
 }
 
 const mapStateToProps = (state) => ({
-  redirectTo: state.getIn(["info", "redirectTo"])
+  redirectTo: state.getIn(["info", "redirectTo"]),
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInfoSubmit(data) {
       dispatch(handleInfoSubmit(data));
+    },
+    handleUpdated() {
+      dispatch(handleIsUpdated());
     }
   }
 };

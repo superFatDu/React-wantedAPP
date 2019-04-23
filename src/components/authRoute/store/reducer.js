@@ -4,7 +4,8 @@ const authDefault = fromJS({
   account: "",
   type: "",
   _id: "",
-  isLogin: false
+  isLogin: false,
+  isUpdate: false
 });
 
 const HANDLE_AUTH = "/AUTH/HANDLE_AUTH";

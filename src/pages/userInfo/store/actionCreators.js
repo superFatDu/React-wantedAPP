@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import { postOtherInfo } from "../../../api/info";
+import { postOtherInfo, getISUpdated } from "../../../api/info";
 
 export const handleInfoSubmit = (data) => {
   return (dispatch) => {
@@ -20,3 +20,17 @@ export const handleInfoSubmit = (data) => {
     });
   }
 };
+
+export const handleIsUpdated = () => {
+  return (dispatch) => {
+    getISUpdated().then(res => {
+      if (res.status === 200) {
+        res = res.data;
+        dispatch({
+          type: actionTypes.HANDLE_IS_UPDATED,
+          value: res
+        })
+      }
+    })
+  }
+}
