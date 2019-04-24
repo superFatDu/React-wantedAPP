@@ -7,7 +7,10 @@ class Boss extends Component {
   render() {
     return (
       this.props.bossList.map(item => (
-        <div key={item._id}>
+        <div
+          key={item._id}
+          onClick={() => this.handleToChat(item)}
+        >
           <WhiteSpace/>
           <Card>
             <Card.Header
@@ -30,6 +33,9 @@ class Boss extends Component {
   }
   componentDidMount() {
     this.props.initList();
+  }
+  handleToChat(v) {
+    this.props.history.push(`/chat/${v.user}`);
   }
 }
 

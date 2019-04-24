@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const DashBoardWrapper = styled.div`
   width: 100%;
-  height: 100%;
   position: relative;
   .nav-top-bar {
     width: 100%;
@@ -12,9 +11,9 @@ export const DashBoardWrapper = styled.div`
     z-index: 999;
   }
   .am-tab-bar {
-  width: 100%;
+    width: 100%;
+    height: auto;
     position: fixed;
-    height: 100%;
     bottom: 0;
   }
 `;

@@ -4,7 +4,7 @@ import { getBossList } from "../../../api/boss"
 export const handleGeniusList= () => {
   return (dispatch) => {
     let params = {
-      type: "boss"
+      type: "genius"
     };
     getBossList(params).then(res => {
       res = res.data;

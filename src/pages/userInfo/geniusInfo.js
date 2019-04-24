@@ -28,14 +28,9 @@ class GeniusInfo extends PureComponent {
         icon: require(`../../statics/img/avatar/${item}.png`),
         text: item
       }));
-    return (
+    return this.props.redirectTo === "" ? (
       <InfoWrapper>
         <AuthRoute/>
-        {
-          this.props.redirectTo
-            ? <Redirect push to={this.props.redirectTo}/>
-            : null
-        }
         <InfoTitle>牛人信息完善</InfoTitle>
         <AvatarSelector>
           <div className="selected-icon">
@@ -49,7 +44,7 @@ class GeniusInfo extends PureComponent {
         </InfoList>
         <InfoSubmit onClick={() => this.props.handleInfoSubmit(this.state)}>提交</InfoSubmit>
       </InfoWrapper>
-    )
+    ) : <Redirect to={this.props.redirectTo}/>
   }
   handleAvatar(item) {
     this.setState({

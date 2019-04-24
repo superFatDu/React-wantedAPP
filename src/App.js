@@ -10,6 +10,7 @@ import BossInfo from "./pages/userInfo/bossInfo";
 import GeniusInfo from "./pages/userInfo/geniusInfo";
 import AuthRoute from "./components/authRoute/authRoute";
 import DashBoard from "./components/dashboard/dashboard";
+import Chat from "./components/chat/chat";
 import "./App.css";
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path="/register" exact component={Register} />
             <Route path="/bossInfo" exact component={BossInfo}/>
             <Route path="/geniusInfo" exact component={GeniusInfo}/>
+            <Route path="/chat/:user" exact component={Chat}/>
             <Route component={DashBoard}/>
           </Switch>
         </BrowserRouter>

@@ -10,6 +10,7 @@ import {
   InfoList,
   InfoSubmit
 } from "./style";
+import AuthRoute from "../../components/authRoute/authRoute";
 
 class BossInfo extends PureComponent {
   constructor(props) {
@@ -29,13 +30,9 @@ class BossInfo extends PureComponent {
         icon: require(`../../statics/img/avatar/${item}.png`),
         text: item
       }));
-    return (
+    return this.props.redirectTo === "" ?(
       <InfoWrapper>
-        {
-          this.props.redirectTo
-            ? <Redirect push to={this.props.redirectTo}/>
-            : null
-        }
+        <AuthRoute/>
         <InfoTitle>伯乐信息完善</InfoTitle>
         <AvatarSelector>
           <div className="selected-icon">
@@ -51,7 +48,7 @@ class BossInfo extends PureComponent {
         </InfoList>
         <InfoSubmit onClick={() => this.props.handleInfoSubmit(this.state)}>提交</InfoSubmit>
       </InfoWrapper>
-    )
+    ): <Redirect to={this.props.redirectTo}/>
   }
   handleAvatar(item) {
     this.setState({
