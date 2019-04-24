@@ -11,6 +11,38 @@ import Msg from "../../pages/msg/msg";
 import User from "../../pages/me/me";
 
 class DashBoard extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      navList: [{
+        path: "/genius",
+        text: "牛人",
+        icon: "job",
+        title: "牛人列表",
+        component: Genius,
+        hide: this.props.type === "boss"
+      }, {
+        path: "/boss",
+        text: "伯乐",
+        icon: "boss",
+        title: "伯乐列表",
+        component: Boss,
+        hide: this.props.type === "genius"
+      }, {
+        path: "/msg",
+        text: "消息",
+        icon: "msg",
+        title: "消息列表",
+        component: Msg
+      }, {
+        path: "/me",
+        text: "我",
+        icon: "user",
+        title: "个人中心",
+        component: User
+      }]
+    }
+  }
   render() {
     const navList = [{
       path: "/genius",

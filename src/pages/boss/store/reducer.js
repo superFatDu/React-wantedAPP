@@ -7,7 +7,7 @@ const defaultState = fromJS({
 
 export default (state = defaultState, action) => {
   if (action.type === actionTypes.HANDLE_BOSS_LIST) {
-    return state.set("bossList", action.value);
+    return state.set("bossList", action.value.data);
   }
   return state;
 }
