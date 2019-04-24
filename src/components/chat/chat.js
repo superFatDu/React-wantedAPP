@@ -8,7 +8,7 @@ import {
 } from "./style";
 
 const socket = io('ws://localhost:8081');
-socket.on("getMsg", data => {
+socket.on("recvMsg", data => {
   console.log(data);
 });
 
@@ -16,8 +16,7 @@ class Chat extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      recvMsg: []
+      text: ""
     }
   }
   render() {
@@ -42,13 +41,17 @@ class Chat extends PureComponent {
     )
   }
   componentDidMount() {
-    this.props.initList();
+    const from = this.props.user._id;
+    const to = this.props.match.params.user;
+    const chat_id = [from, to].sort().join('_');
+    this.props.initList(chat_id);
   }
 
   handleChatSubmit() {
-    socket.emit("sendMsg", {
-      text: this.state.text
-    });
+    const from = this.props.user._id;
+    const to = this.props.match.params.user;
+    const msg = this.state.text;
+    this.props.sendMsg(from, to, msg);
     this.setState({
       text: ""
     })
@@ -56,13 +59,16 @@ class Chat extends PureComponent {
 }
 
 const mapState = (state) => ({
-
+  user: state.getIn(["user", "loginMsg"])
 });
 
 const mapDispatch = (dispatch) => {
   return {
-    initList() {
-      dispatch(actionCreators.handleMsgList());
+    initList(chat_id) {
+      dispatch(actionCreators.handleMsgList(chat_id));
+    },
+    sendMsg(from, to, msg) {
+      dispatch(actionCreators.sendMsg(from, to, msg));
     }
   }
 };

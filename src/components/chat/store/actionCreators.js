@@ -5,9 +5,9 @@ import io from "socket.io-client";
 // 连接socket
 const socket = io("ws://localhost:8081");
 
-export const handleMsgList = () => {
+export const handleMsgList = (chat_id) => {
   return (dispatch) => {
-    initMsgList().then(res => {
+    initMsgList({chat_id}).then(res => {
       if (res.status === 200) {
         res = res.data;
         dispatch({
@@ -18,6 +18,12 @@ export const handleMsgList = () => {
     });
   }
 };
+
+export const sendMsg = (from, to, msg) => {
+  return dispatch => {
+    socket.emit("sendMsg", {from, to, msg});
+  }
+}
 
 export const handleChatReceive = () => ({
   type: actionTypes.MSG_RECV

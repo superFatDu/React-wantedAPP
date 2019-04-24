@@ -1,5 +1,5 @@
 import $http from "../axiosConfig";
 
-const initMsgList = (params) => $http("get", "/chat/init", "0", params, false).then();
+const initMsgList = (params) => $http("post", "/chat/init", "1", params, false).then();
 
 export { initMsgList }

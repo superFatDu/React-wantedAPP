@@ -35,7 +35,7 @@ class Genius extends Component {
     this.props.initList();
   }
   handleToChat(v) {
-    this.props.history.push(`/chat/${v.user}`);
+    this.props.history.push(`/chat/${v._id}`);
   }
 }
 

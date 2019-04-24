@@ -20,12 +20,14 @@ class Boss extends Component {
             />
             <Card.Body>
               {
-                item.desc.split("/n").map(v => (
-                  <div key={item._id}>{v}</div>
-                ))
+                item.desc
+                  ? item.desc.split("/n").map(v => (
+                      <div key={item._id}>{v}</div>
+                    ))
+                  : null
               }
             </Card.Body>
-            <Card.Footer content="2019-04-24" style={{marginTop: 10}}/>
+            <Card.Footer content={item.updateTime ? item.updateTime : "新用户"} style={{marginTop: 10}}/>
           </Card>
         </div>
       ))
@@ -35,7 +37,7 @@ class Boss extends Component {
     this.props.initList();
   }
   handleToChat(v) {
-    this.props.history.push(`/chat/${v.user}`);
+    this.props.history.push(`/chat/${v._id}`);
   }
 }
 
