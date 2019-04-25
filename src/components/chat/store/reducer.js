@@ -7,8 +7,12 @@ const defaultState = fromJS({
 });
 
 export default (state = defaultState, action) => {
-  if (action.type === actionTypes.MSG_LIST) {
-    return {...state, chatMsg: action.value, unread: action.value.filter(v => !v.read).length}
+  switch (action.type) {
+    case actionTypes.MSG_LIST:
+      return {...state, chatMsg: action.value, unread: action.value.filter(v => !v.read).length};
+    case actionTypes.MSG_RECV:
+      return {...state, chatMsg: [...state.chatMsg, action.value], unread: state.unread + 1}
+    default:
+      return state;
   }
-  return state;
 }

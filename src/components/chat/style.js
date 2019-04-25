@@ -16,6 +16,7 @@ export const ChatWrapper = styled.div`
     left: 0;
     box-sizing: border-box;
     padding-left: 15px;
+    z-index: 999;
   }
   .chat-main {
     width: 100%;
@@ -23,6 +24,62 @@ export const ChatWrapper = styled.div`
     box-sizing: border-box;
     padding: 60px 15px 65px 15px;
     overflow: auto;
+    p {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+      &.chat-from {
+        float: right;
+        text-align: right;
+        span {
+          display: inline-block;
+          background: #778cf9;
+          padding: 10px;
+          color: #fff;
+          border-radius: 4px;
+          text-align: left;
+          max-width: 70%;
+          margin-right: 9px;
+          position: relative;
+          vertical-align: top;
+          &:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 7px solid #778cf9;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            position: absolute;
+            top: 7px;
+            right: -5px;
+          }
+        }
+      }
+      &.chat-to {
+        float: left;
+        span {
+          display: inline-block;
+          background: #f7f7f7;
+          padding: 10px;
+          border-radius: 4px;
+          max-width: 70%;
+          margin-left: 9px;
+          position: relative;
+          vertical-align: top;
+          &:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-right: 7px solid #f7f7f7;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            position: absolute;
+            top: 7px;
+            left: -5px;
+          }
+        }
+      }
+    }
   }
   .chat-footer {
     width: 100%;

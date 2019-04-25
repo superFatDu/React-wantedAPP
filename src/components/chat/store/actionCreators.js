@@ -20,14 +20,21 @@ export const handleMsgList = (chat_id) => {
 };
 
 export const sendMsg = (from, to, msg) => {
-  return dispatch => {
+  return () => {
     socket.emit("sendMsg", {from, to, msg});
   }
-}
+};
 
-export const handleChatReceive = () => ({
-  type: actionTypes.MSG_RECV
-});
+export const recvMsg = () => {
+  return dispatch => {
+    socket.on("recvMsg", data => {
+      dispatch({
+        type: actionTypes.MSG_RECV,
+        value: data
+      })
+    })
+  }
+};
 
 export const handleChatRead = () => ({
   type: actionTypes.MSG_READ
