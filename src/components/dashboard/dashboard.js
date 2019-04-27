@@ -9,6 +9,7 @@ import Genius from "../../pages/genius/genius";
 import Boss from "../../pages/boss/boss";
 import Msg from "../../pages/msg/msg";
 import User from "../../pages/me/me";
+import { actionCreators } from "../chat/store";
 
 class DashBoard extends PureComponent {
   render() {
@@ -53,14 +54,30 @@ class DashBoard extends PureComponent {
             }
           </Switch>
         </div>
-        <NavLink data={navList}/>
+        <NavLink data={navList} msgList={this.props.msgList}/>
       </DashBoardWrapper>
     )
+  }
+  componentDidMount() {
+    this.props.initList();
+    this.props.recvMsg();
   }
 }
 
 const mapState = (state) => ({
-  type: state.getIn(["auth", "type"])
+  type: state.getIn(["auth", "type"]),
+  msgList: state.getIn(["chat", "chatMsg"])
 });
 
-export default connect(mapState, null)(DashBoard);
+const mapDispatch = (dispatch) => {
+  return {
+    initList() {
+      dispatch(actionCreators.handleMsgList());
+    },
+    recvMsg() {
+      dispatch(actionCreators.recvMsg());
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(DashBoard);

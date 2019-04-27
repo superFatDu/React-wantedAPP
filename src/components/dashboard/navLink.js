@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 class NavLink extends Component {
   render() {
     const navList = this.props.data.filter(item => !item.hide);
+    const unreadNum = this.props.msgList.filter(item => !item.unread).length;
     const { pathname } = this.props.location;
     return (
       <TabBar
@@ -15,6 +16,7 @@ class NavLink extends Component {
         {
           navList.map(v => (
             <TabBar.Item
+              badge={ v.icon === "msg" ? unreadNum : null }
               key={v.path}
               title={v.title}
               icon={{uri: require(`../../statics/img/${v.icon}.png`)}}

@@ -18,13 +18,14 @@ class Chat extends PureComponent {
     super(props);
     this.state = {
       text: "",
-      chatterInfo: {}
+      chatterInfo: {},
+      chatter: ""
     }
   }
   render() {
     return (
       <ChatWrapper>
-        <div className="chat-header">{this.props.match.params.user}</div>
+        <div className="chat-header">{this.state.chatter}</div>
         <div className="chat-main">
           {
             this.props.msgList.length !== 0
@@ -55,11 +56,11 @@ class Chat extends PureComponent {
     )
   }
   componentDidMount() {
-    const from = this.props.user._id;
+    // const from = this.props.user._id;
     const to = this.props.match.params.user;
-    const chat_id = [from, to].sort().join('_');
-    this.props.initList(chat_id);
-    this.props.recvMsg();
+    // const chat_id = [from, to].sort().join('_');
+    // this.props.initList();
+    // this.props.recvMsg();
     getChatterIcon({_id: to}).then(res => {
       if (res.status === 200) {
         res = res.data;
@@ -68,7 +69,20 @@ class Chat extends PureComponent {
         })
       }
     });
-    document.querySelector(".chat-main").scrollTo(0,document.querySelector(".chat-main").scrollHeight);
+
+    let chatterName = "";
+    if(this.props.user.type === "boss") {
+      if (this.props.geniusList.length !== 0) {
+        chatterName = this.props.geniusList[0].user
+      }
+    } else {
+      if (this.props.bossList.length !== 0) {
+        chatterName = this.props.bossList[0].user
+      }
+    }
+    this.setState({
+      chatter: chatterName
+    })
   }
 
   handleChatSubmit() {
@@ -84,20 +98,22 @@ class Chat extends PureComponent {
 
 const mapState = (state) => ({
   user: state.getIn(["info", "data"]),
-  msgList: state.getIn(["chat", "chatMsg"])
+  msgList: state.getIn(["chat", "chatMsg"]),
+  bossList: state.getIn(["boss", "bossList"]),
+  geniusList: state.getIn(["genius", "geniusList"])
 });
 
 const mapDispatch = (dispatch) => {
   return {
-    initList(chat_id) {
-      dispatch(actionCreators.handleMsgList(chat_id));
-    },
+    // initList() {
+    //   dispatch(actionCreators.handleMsgList());
+    // },
     sendMsg(from, to, msg) {
       dispatch(actionCreators.sendMsg(from, to, msg));
     },
-    recvMsg() {
-      dispatch(actionCreators.recvMsg());
-    }
+    // recvMsg() {
+    //   dispatch(actionCreators.recvMsg());
+    // }
   }
 };
 
